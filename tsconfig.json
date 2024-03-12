@@ -38,7 +38,8 @@
     "app/ui/fonts.ts \"../fonts.ts \"../fonts.ts \"../\"",
     "app/ui/fonts.ts \"../fonts.ts \"../fonts.js\"",
     "app/ui/fonts.ts \"../fonts.ts\"",
-    "app/ui/fonts.ts .."
+    "app/ui/fonts.ts ..",
+    "app/dashboard/page.tsx (overview)/page.tsx .."
   ],
   "exclude": [
     "node_modules"
