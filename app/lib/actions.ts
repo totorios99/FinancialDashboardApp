@@ -16,9 +16,9 @@ export async function authenticate(
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-        return 'Invalid credentials';
+        return 'Credenciales no válidas';
         default:
-          return 'Something went wrong';
+          return 'Algo falló';
       }
     }
     throw error;
@@ -27,13 +27,13 @@ export async function authenticate(
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string({
-    invalid_type_error: 'Please select a customer',
+    invalid_type_error: 'Selecciona un cliente',
   }),
   amount: z.coerce
     .number()
-    .gt(0, { message: 'Please enter an amount greater than $0.' }),
+    .gt(0, { message: 'Ingresa una cantidad mayor a  $0.' }),
   status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Please select an invoice status',
+    invalid_type_error: 'Selecciona un estado para la factura',
   }),
   date: z.string(),
 })
@@ -51,7 +51,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing fields. Failed to create invoice',
+      message: 'Campos faltantes. Falló la creación de factura',
     };
   }
 
@@ -63,7 +63,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     await sql`INSERT INTO invoices (customer_id, amount, status, date) VALUES (${customerId}, ${amountInCents}, ${status}, ${date})`;
   } catch (error) {
     return {
-      message: 'Database error: Failed to create invoice',
+      message: 'Error de base de datos. Falló create invoice',
     }
   }
   revalidatePath('/dashboard/invoices');
@@ -90,7 +90,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
     await sql`UPDATE invoices SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status} WHERE id = ${id}`;
   } catch (error) {
     return {
-      message: 'Database error: Failed to update invoice',
+      message: 'Error de base de datos. Falló update invoice',
     }
   }
   revalidatePath('/dashboard/invoices');
@@ -103,7 +103,7 @@ export async function deleteInvoice(id: string) {
     revalidatePath('/dashboard/invoices');
     return { message: 'Deleted invoice' }
   } catch (error) {
-    return { message: 'Database error: Failed to delete invoice' }
+    return { message: 'Error de base de datos. Falló  delete invoice' }
   }
 }
 export type State = {

@@ -31,7 +31,7 @@ export const { auth, signIn, signOut } = NextAuth({
           const passwordsMatch = await bcrypt.compare(password, user.password);
           if (passwordsMatch) return user;
     }
-        console.log('Invalid credentials');
+        console.log('Credenciales no válidas');
         return null;
       }
   })

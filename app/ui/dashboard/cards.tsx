@@ -20,10 +20,10 @@ export default async function CardWrapper() {
     <>
       {/* NOTE: comment in this code when you get to this point in the course */}
 
-      <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card title="Total Customers" value={numberOfCustomers} type="customers" />
+      <Card title="Recibido" value={totalPaidInvoices} type="collected" />
+      <Card title="Pendiente" value={totalPendingInvoices} type="pending" />
+      <Card title="Facturas totales" value={numberOfInvoices} type="invoices" />
+      <Card title="Clientes totales" value={numberOfCustomers} type="customers" />
     </>
   );
 }
